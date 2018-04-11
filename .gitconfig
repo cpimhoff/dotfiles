@@ -1,0 +1,92 @@
+[branch]
+  autosetuprebase = always
+[pull]
+  rebase = true
+[user]
+  name = Charlie Imhoff
+  email = cpimhoff@gmail.com
+[push]
+  default = simple
+[core]
+  pager = less -R -F
+	preloadindex = true
+
+# integrate
+[diff]
+	tool = Kaleidoscope
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+	prompt = false
+
+[alias]
+  # merge changes from a branch only if it will not result in a merge commit
+  ff = merge --ff-only
+
+  # squash a series of commits into one
+  squash = "!f() { git rebase -i HEAD~$1; }; f"
+  flatten = "!f() { git rebase -i `git merge-base master HEAD`; }; f"
+
+  # use difftool and mergetool
+  d = difftool
+  resolve = mergetool -y -t Kaleidoscope
+
+  # review commits on a feature branch
+  dlast = difftool head~1
+  review = "!f() { git difftool `git merge-base master HEAD`; }; f"
+  files = "!f() { git diff --name-only `git merge-base master HEAD`; }; f"
+  
+  # branch management
+  rename = branch -m
+  brarchive = "!f() { git branch -m archive/`git rev-parse --abbrev-ref HEAD`; }; f"
+  br = "!f() { git branch --color=always | grep -v '^  archive/'; }; f"
+
+  # quicker checkouts
+  back = checkout -
+  self = checkout .
+  master = checkout master
+
+  # literal shortcuts
+  s = status
+  co = checkout
+
+  # amend a commit
+  amend = commit --amend
+  # folds added files into this commit without editing the commit message
+  fold = commit --amend --no-edit
+
+  # Tell git to ignore changes to a file that would otherwise be tracked by git, like config files in .idea/
+  # https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  # List all files that have been "assumed"
+  assumelist  = "!git ls-files -v | grep -E '^s|^h' | cut -c 3-"
+
+  # unstage a file (oppisite of `add`)
+  unstage = reset HEAD --
+
+  # resets all uncommited changes
+  resethard = reset --hard
+
+  # log only my changes
+  logme = log --author=cpimhoff
+  # show the last diff
+  last = log -1 HEAD
+  # list all recent commits
+  list = log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count=10
+  # list recent commits by me
+  listme = log --author=cpimhoff --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit --max-count=10
+
+  # meta
+  openconfig = "!f() { sublime ~/.gitconfig; }; f"
+  
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
