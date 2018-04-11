@@ -1,0 +1,22 @@
+{
+	"caret_extra_bottom": 1,
+	"caret_extra_top": 1,
+	"caret_extra_width": 1,
+	"close_windows_when_empty": true,
+	"color_scheme": "Packages/ayu/ayu-mirage.tmTheme",
+	"font_face": "SFMono-Regular",
+	"font_size": 16,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"margin": -4,
+	"rulers":
+	[
+		110
+	],
+	"scroll_past_end": true,
+	"theme": "ayu-mirage.sublime-theme",
+	"trim_trailing_white_space_on_save": true
+}
