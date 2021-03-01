@@ -1,0 +1,115 @@
+{
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.terraform": true,
+    "**/*.pyc": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.minimap.enabled": false,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.startupEditor": "none",
+  "breadcrumbs.enabled": true,
+  "workbench.editor.showTabs": false,
+  "window.closeWhenEmpty": true,
+  "editor.fontFamily": "SFMono-Medium",
+  "window.restoreFullscreen": true,
+  "editor.scrollBeyondLastLine": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.rulers": [120],
+  "editor.snippetSuggestions": "top",
+  "python.linting.pylintEnabled": false,
+  "python.formatting.autopep8Args": ["--max-line-length", "119"],
+  "python.pythonPath": "/Users/cimhoff/.pyenv/versions/3.6.5/bin/python3.6",
+  "editor.wordWrapColumn": 120,
+  "python.testing.unittestArgs": ["-v", "-s", ".", "-p", "test_*.py"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.unittestEnabled": true,
+  "editor.fontSize": 14,
+  "files.associations": {
+    "*.template": "mustache",
+    "*.yml": "yaml"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "C_Cpp.autoAddFileAssociations": false,
+  "vscode-postgres.defaultDatabase": "core",
+  "vscode-postgres.defaultConnection": "local-core",
+  "vscode-postgres.virtualFolders": [],
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.blame.toggleMode": "window",
+  "gitlens.codeLens.enabled": false,
+  "gitlens.blame.format": "${id} - ${author} - ${agoOrDate|14-}",
+  "editor.codeLens": false,
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.quiet": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.fontAliasing": "auto",
+  "workbench.activityBar.visible": true,
+  "bazel.executable": "/Users/cimhoff/.local/bin/bazel",
+  "workbench.sideBar.location": "left",
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "sort-imports.on-save": false,
+  "sort-imports.default-sort-style": "module-scoped",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "ansible.azureRestSpec": "/Users/cimhoff/.vscode/rest",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.columnSelection": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
+  "python.formatting.blackArgs": ["--line-length=120"],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "autoDocstring.docstringFormat": "sphinx",
+  "jasmineExplorer.config": "karma.conf.js",
+  "python.defaultInterpreterPath": "~/code/env3_next_next/bin/python",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "auto-close-tag.activationOnLanguage": [
+    "xml",
+    "php",
+    "blade",
+    "ejs",
+    "jinja",
+    "javascriptreact",
+    "typescriptreact",
+    "plaintext",
+    "markdown",
+    "vue",
+    "liquid",
+    "erb",
+    "lang-cfml",
+    "cfml",
+    "HTML (EEx)",
+    "HTML (Eex)",
+    "plist"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.packageManager": "yarn",
+  "eslint.alwaysShowStatus": true,
+  "prettier.resolveGlobalModules": true
+}

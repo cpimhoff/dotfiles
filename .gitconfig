@@ -25,12 +25,19 @@
 	prompt = false
 
 [alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  merge-master-name = "!git merge-base master HEAD"
+
   # merge changes from a branch only if it will not result in a merge commit
   ff = merge --ff-only
 
   # squash a series of commits into one
   squash = "!f() { git rebase -i HEAD~$1; }; f"
-  flatten = "!f() { git rebase -i `git merge-base master HEAD`; }; f"
+  flatten = "!git rebase -i $(git merge-master-name)"
+
+  # rebase-based merge process
+  sync = "!f() { git master && git pull && git back && git rebase master; }; f"
+  finalize = "!f() { git flatten && git sync && git master && git ff @{-1} && git push && git branch -d @{-1}; }; f"
 
   # use difftool and mergetool
   d = difftool
@@ -38,12 +45,16 @@
 
   # review commits on a feature branch
   dlast = difftool head~1
-  review = "!f() { git difftool `git merge-base master HEAD`; }; f"
-  files = "!f() { git diff --name-only `git merge-base master HEAD`; }; f"
-  
+  review = "!git difftool $(git merge-master-name)"
+  files = "!git diff --name-only $(git merge-master-name)"
+
+  # publish to origin
+  publish = "!git push -u origin $(git branch-name)"
+  unpublish = "!git push origin :$(git branch-name)"
+
   # branch management
   rename = branch -m
-  brarchive = "!f() { git branch -m archive/`git rev-parse --abbrev-ref HEAD`; }; f"
+  brarchive = "!git branch -m archive/$(git branch-name)"
   br = "!f() { git branch --color=always | grep -v '^  archive/'; }; f"
 
   # quicker checkouts
@@ -54,6 +65,7 @@
   # literal shortcuts
   s = status
   co = checkout
+  pick = cherry-pick
 
   # amend a commit
   amend = commit --amend
@@ -73,20 +85,27 @@
   # resets all uncommited changes
   resethard = reset --hard
 
-  # log only my changes
-  logme = log --author=cpimhoff
+  # resets changes made to a specific file on a branch
+  stable = "!f() { git checkout `git merge-master-name` $1; }; f"
+
+  # log only your own changes
+  logme = "!f() { git log --author=`whoami`; }; f"
   # show the last diff
   last = log -1 HEAD
   # list all recent commits
   list = log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count=10
   # list recent commits by me
-  listme = log --author=cpimhoff --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit --max-count=10
+  listme = "!f() { git log --author=`whoami` --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit --max-count=10; }; f"
+
+  # sparse checkouts
+  sparse = sparse-checkout
 
   # meta
-  openconfig = "!f() { sublime ~/.gitconfig; }; f"
-  
+  openconfig = "!f() { code ~/.gitconfig; }; f"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[protocol]
+	version = 2
